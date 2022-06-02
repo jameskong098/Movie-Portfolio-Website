@@ -30,8 +30,6 @@ const User = require('./models/User');
 const mongoose = require( 'mongoose' );
 
 const mongodb_URI = process.env.mongodb_URI
-//const mongodb_URI = 'mongodb://localhost:27017/cs103a_todo'
-//const mongodb_URI = 'mongodb+srv://cs_sj:BrandeisSpr22@cluster0.kgugl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
 
 mongoose.connect( mongodb_URI, { useNewUrlParser: true, useUnifiedTopology: true } );
 // fix deprecation warnings
@@ -80,12 +78,6 @@ app.use(require('express-session')({
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
-
-
-// this allows us to use page layout for the views 
-// so we don't have to repeat the headers and footers on every page ...
-// the layout is in views/layout.ejs
-app.use(layouts);
 
 // Here we process the requests so they are easy to handle
 app.use(express.json());

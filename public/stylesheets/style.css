@@ -1,0 +1,11 @@
+body {
+    text-align:center;
+    height: 100vh;
+    background-image: url('/images/windowsXPwallpaper.jpg');
+    background-size: cover;
+}
+
+options {
+    font-size:40px;
+    
+}
