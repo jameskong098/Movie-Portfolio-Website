@@ -1,14 +1,4 @@
-Brandeis University
-
-COSI-103A-1: Fundamentals of Software Engineering
-
-Creative Programming Assignment 02 - Web Apps
-
-Student: James Kong
-
-Video Demo: https://drive.google.com/file/d/1oYrDroTcjoUo33e31YQywNpgia88wc1V/view?usp=sharing
-
-This project is a diary entry drive application. Users can enter in diary entries and the website will hold their entries in the mongoDB database. They can also delete entries. The website is built off of the express.js framework and deployed using Heroku.
+This website was made for my fellow good friend Max Goodman. I offered to make this website for him to get more practice working with express.js and also to get another project down my belt. It is also just fun overall to make things for people.
 
 ## Installation
 
@@ -38,11 +28,3 @@ and start the project locally with
 startup.sh
 ```
 If you want to deploy online, you will need to make an account on Heroku and link your mongoDB and push the project. Heroku: https://dashboard.heroku.com/apps
-
-Screenshots:
-  
-  ![image](https://user-images.githubusercontent.com/78178372/166342708-6b08e797-b398-4966-9d0b-54611104f1cf.png)
-
-  ![image](https://user-images.githubusercontent.com/78178372/166342728-f5030e05-1f0e-4088-8c86-641d1920a75a.png)
-
-  ![image](https://user-images.githubusercontent.com/78178372/166342814-94c26a63-1660-4077-99bd-d2063e8e66aa.png)
