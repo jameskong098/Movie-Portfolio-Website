@@ -1,0 +1,45 @@
+<div class="bg-light p-3 rounded m-3 w-3">
+    <h1 class="display-4 text-center">My diaries</h1>
+    <p class="lead text-center">Welcome <%= user['username'] %>, you have <%= entries.length %> entries </p>
+</div>
+
+<form method="post" action="/diary/addEntry">
+    <div class="flex-wrap p-3 m-3 border text-center">
+        <div class="p-1">
+            <div class="m-3">
+                Title:
+            </div>
+            <input type="text" name="title" required>
+        </div>
+        <div class="p-2">
+            <div class="m-3">
+                How would you rate your day? 1 being the worst, 5 being the best:
+            </div>
+            <input type="number" name="rating" min="1" max="5" required>
+        </div>
+        <div style="flex-direction: column">
+            <div class="p-3"> 
+            Tell us about your day:
+            </div class="p-3">
+            <textarea style="resize: none" name="description" rows="10" cols="50" maxlength="5490" required></textarea>
+        </div>
+        <div class="p-2">
+            <input type="submit" value="Submit Entry"><br>
+        </div>
+    </div>      
+</form>
+
+
+<div class="p-1 border">
+    <% for (diary of entries){%>
+        <div class="mb-2">          
+            <b class="m-2">Title:</b><%= diary.title%><br><br>
+            <b class="m-2">Rating (1-5):</b><%= diary.rating%><br> <br>
+            <b class="m-2">My Entry:</b><br><br>
+            <i class="m-2"><%= diary.description %></i><br> <br>
+            <b class="m-2">Date created:</b><%= diary.createdAt %>
+            <a href="/diary/delete/<%= diary._id%>">(Delete)</a>
+        </div>
+        <hr>
+    <% }%>
+</div>
