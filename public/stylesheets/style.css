@@ -2,10 +2,12 @@ body {
     height: 100vh;
     background-image: url('/images/windowsXPwallpaper.jpg');
     background-size: cover;
+    background-repeat:no-repeat;
 }
 
 options {
     font-size:40px;
+    font-family:'Courier New', Courier, monospace;
     display:flex;
     align-items: center;
     flex-direction: column;
