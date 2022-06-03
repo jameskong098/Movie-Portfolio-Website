@@ -3,7 +3,7 @@ const mongoose = require( 'mongoose' );
 const Schema = mongoose.Schema;
 const ObjectId = Schema.Types.ObjectId;
 
-var DiaryEntrySchema = Schema( {
+var entrySchema = Schema( {
   userId: ObjectId,
   title: String,
   rating: Number,
@@ -11,4 +11,4 @@ var DiaryEntrySchema = Schema( {
   createdAt: Date,
 } );
 
-module.exports = mongoose.model( 'Diary', DiaryEntrySchema );
+module.exports = mongoose.model( 'Entry', entrySchema );

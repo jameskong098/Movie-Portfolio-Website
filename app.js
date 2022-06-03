@@ -138,52 +138,6 @@ app.get("/about", (req, res, next) => {
   res.render("about");
 });
 
-app.get('/diary',
-  isLoggedIn,   // redirect to /login if user is not logged in
-  async (req,res,next) => {
-    try{
-      let userId = res.locals.user._id;  // get the user's diary entries
-      let entries = await Diary.find({userId:userId}); // lookup the user's diary entries
-      res.locals.entries = entries;  //make the items available in the view
-      res.render("diary");  // render to the toDo page
-    } catch (e){
-      next(e);
-    }
-  }
-  )
-
-app.post('/diary/addEntry',
-  isLoggedIn,
-  async (req,res,next) => {
-    try{
-      const {title,rating,description} = req.body; // get title, rating, and description from the body
-      const userId = res.locals.user._id; // get the user's id
-      const createdAt = new Date(); // get the current date/time
-      const likes = 0;
-      const dislikes = 0;
-      let data = {userId, title, rating, description, createdAt, likes, dislikes} // create the data object
-      let entry = new Diary(data) // create the database object (and test the types are correct)
-      await entry.save() // save the entry in the database
-      res.redirect('/diary')  // go back to the todo page
-    } catch (e){
-      next(e);
-    }
-  }
-  )
-
-  app.get("/diary/delete/:diaryId",
-  isLoggedIn,
-  async (req,res,next) => {
-    try{
-      const diaryId=req.params.diaryId; // get the id of the item to delete
-      await Diary.deleteOne({_id:diaryId}) // remove that item from the database
-      res.redirect('/diary') // go back to the todo page
-    } catch (e){
-      next(e);
-    }
-  }
-)
-
 // here we catch 404 errors and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
@@ -213,7 +167,7 @@ app.set("port", port);
 // and now we startup the server listening on that port
 const http = require("http");
 const { reset } = require("nodemon");
-const Diary = require("./models/Diary");
+const Diary = require("./models/entry");
 const server = http.createServer(app);
 
 server.listen(port);
