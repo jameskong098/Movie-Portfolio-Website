@@ -130,12 +130,28 @@ app.get("/", (req, res, next) => {
   }
 });
 
-app.get("/home", (req, res, next) => {
+app.get("/index", (req, res, next) => {
   res.render("index");
+});
+
+app.get("/films", (req, res, next) => {
+  res.render("films");
+});
+
+app.get("/animations", (req, res, next) => {
+  res.render("animations");
+});
+
+app.get("/reviewsPosts", (req, res, next) => {
+  res.render("reviewsPosts");
 });
 
 app.get("/about", (req, res, next) => {
   res.render("about");
+});
+
+app.get("/login", (req, res, next) => {
+  res.render("login");
 });
 
 // here we catch 404 errors and forward to error handler
