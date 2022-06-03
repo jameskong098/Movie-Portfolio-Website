@@ -2,7 +2,7 @@ body {
     height: 100vh;
     background-image: url('/images/windowsXPwallpaper.jpg');
     background-size: cover;
-    background-repeat:no-repeat;
+    background-repeat:repeat;
 }
 
 options {
