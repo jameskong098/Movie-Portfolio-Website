@@ -13,7 +13,59 @@ options {
     flex-direction: column;
 }
 
+/*
+Credit to Alex Loomer for the button styles and animations!
+https://codepen.io/atloomer
+*/
+
 a {
-    color:black; 
-    text-decoration:none
+    color: black;
+    text-decoration: none;
+    letter-spacing: 1px;
 }
+
+.button {
+    display: inline-flex;
+    height: 50px;
+    width: 280px;
+    border: 2px solid black;
+    margin: 20px 20px 20px 20px;
+    color: #BFC0C0;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-size: .8em;
+    letter-spacing: 1.5px;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+#button-2 {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+  
+#button-2 a {
+    position: relative;
+    transition: all .35s ease-Out;
+}
+  
+#slide {
+    width: 100%;
+    height: 100%;
+    left: -280px;
+    background: white;
+    position: absolute;
+    transition: all .35s ease-Out;
+    bottom: 0;
+}
+  
+#button-2:hover #slide {
+    left: 0;
+}
+  
+#button-2:hover a {
+    color: #2D3142;
+}
+  
