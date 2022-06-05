@@ -1,1 +1,3 @@
 This website was made for my fellow good friend Max Goodman. He is one of my best friends and is an amazing person, so I offered to make this website for him to get more practice working with HTML, Javascript, and Node.js. Getting another project down my belt is also nice. It is also just fun overall to make things for people. Anyways, I hope you enjoy this website Max!
+
+Link to the live website: https://maxgoodman.herokuapp.com/index
