@@ -13,7 +13,8 @@ options {
     flex-direction: column;
     background: rgba(190, 189, 189, 0.5); 
     width: fit-content; 
-    margin:auto
+    margin:auto;
+    resize:none
 }
 
 optionsButNoBack {
@@ -22,6 +23,7 @@ optionsButNoBack {
     display:flex;
     align-items: center;
     flex-direction: column;
+    resize:none;
 }
 
 back {
@@ -32,7 +34,8 @@ back {
     flex-direction: column;
     background: rgba(190, 189, 189, 0.5); 
     width: fit-content; 
-    margin:auto
+    margin:auto;
+    resize:none
 }
 
 /*

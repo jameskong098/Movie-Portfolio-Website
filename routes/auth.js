@@ -54,7 +54,7 @@ router.post('/login',
     try {
       const {username,passphrase} = req.body
       const user = await User.findOne({username:username})
-      const isMatch = false;
+      var isMatch = false;
       if (user != null) {
         isMatch = await bcrypt.compare(passphrase,user.passphrase);
       }
