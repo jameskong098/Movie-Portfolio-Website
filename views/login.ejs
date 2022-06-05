@@ -10,23 +10,22 @@
             <a href="/index">Back</a><br><br>
         </div>
     </options>
-    <div style="text-align: center">
-        <text style="font-size:350%">Login to see your entries!</text>
-        <hr style="width: 45%; margin: 0 auto"><br><br>
-            <form class="bg-light" method="post" action="/login"><br>
-                <text style="font-size:150%">Username: </text>
-                <input type="text"
-                    autocomplete="username"
-                    name="username">
-                    <br><br>
-                <text style="font-size:150%">Password: </text>
-                <input type="password"
-                    autocomplete="passphrase"
-                    name="passphrase"><br><br><br>
-                Don't have an account? Click here to <a href="/signupPage">signup</a><br><br>
-                <input type="submit">
+    <div style="text-align: center; border: solid 2px; border-color:white; width: fit-content; margin:auto; padding: 15px">
+        <text style="font-size:300%">Admin Login</text>
+        <form class="bg-light" method="post" action="/login"><br>
+            <text style="font-size:150%">Username: </text>
+            <input type="text"
+                autocomplete="username"
+                name="username">
                 <br><br>
-            </form>
+            <text style="font-size:150%">Password: </text>
+            <input type="password"
+                autocomplete="passphrase"
+                name="passphrase"><br><br><br>
+            <text>Don't have an account? Click here to </text><a style="color:blue; text-decoration:underline" href="/signupPage">signup</a><br><br>
+            <input type="submit">
+            <br><br>
+        </form>
     </div>
 </body>
 
