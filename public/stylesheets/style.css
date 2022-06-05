@@ -11,6 +11,28 @@ options {
     display:flex;
     align-items: center;
     flex-direction: column;
+    background: rgba(190, 189, 189, 0.5); 
+    width: fit-content; 
+    margin:auto
+}
+
+optionsButNoBack {
+    font-size:40px;
+    font-family:'Courier New', Courier, monospace;
+    display:flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+back {
+    font-size:40px;
+    font-family:'Courier New', Courier, monospace;
+    display:flex;
+    align-items: flex-start;
+    flex-direction: column;
+    background: rgba(190, 189, 189, 0.5); 
+    width: fit-content; 
+    margin:auto
 }
 
 /*
