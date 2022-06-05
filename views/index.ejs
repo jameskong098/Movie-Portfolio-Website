@@ -29,7 +29,11 @@
             <a href="mailto: jameskong098@gmail.com">Contact Me</a><br><br>
         </div>
         <footer style="text-align:center">
-            <a style="font-size:15px;" href="/login">Admin Login |</a>
+            <% if (!loggedIn) {%>
+                <a style="font-size:15px;" href="/login">Admin Login |</a>
+            <% } else { %>
+                <a style="font-size:15px;" href="/logout">Log Out |</a>
+            <% } %>
             <a style="font-size:15px;" href="/aboutDeveloper">About the Developer</a>
         </footer>
     </options><br><br>

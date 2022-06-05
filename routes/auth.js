@@ -39,6 +39,7 @@ router.use((req,res,next) => {
     res.locals.loggedIn = false
     res.locals.username = null
     res.locals.user = null
+    res.locals.incorrect = false
   }
   next()
 })
@@ -62,42 +63,8 @@ router.post('/login',
       } else {
         req.session.username = null
         req.session.user = null
-        res.redirect('/login')
-      }
-    }catch(e){
-      next(e)
-    }
-  })
-
-router.post('/signup',
-  async (req,res,next) =>{
-    try {
-      const {username,passphrase,passphrase2} = req.body
-      if (passphrase != passphrase2){
-        res.redirect('/login')
-      }else {
-        const encrypted = await bcrypt.hash(passphrase, saltRounds);
-
-        // check to make sure that username is not already taken!!
-        const duplicates = await User.find({username})
-        
-        if (duplicates.length>0){
-          // it would be better to render a page with an error message instead of this plain text response
-          res.send("username has already been taken, please go back and try another username")
-        }else {
-          // the username has not been taken so create a new user and store it in the database
-          const user = new User(
-            {username:username,
-             passphrase:encrypted,
-            })
-          
-          await user.save()
-          req.session.username = user.username
-          req.session.user = user
-          res.redirect('/')
-        }
-        
-        
+        res.locals.incorrect = true
+        res.render('login')
       }
     }catch(e){
       next(e)

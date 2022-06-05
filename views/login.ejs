@@ -21,9 +21,12 @@
             <text style="font-size:150%">Password: </text>
             <input type="password"
                 autocomplete="passphrase"
-                name="passphrase"><br><br><br>
-            <input type="submit">
-            <br><br>
+                name="passphrase"><br><br>
+            <% if (incorrect) {%>
+                <a style="font-size:15px; color:red" href="/login">Incorrect Password. Try Again!</a>
+            <% } %>
+            <br><br><input type="submit">
+            <br>
         </form>
     </options>
 </body>
