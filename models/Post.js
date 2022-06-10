@@ -6,7 +6,6 @@ const ObjectId = Schema.Types.ObjectId;
 var postSchema = Schema( {
   userId: ObjectId,
   title: String,
-  rating: Number,
   description:String,
   createdAt: Date,
 } );

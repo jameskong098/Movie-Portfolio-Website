@@ -131,44 +131,44 @@ app.get("/animations", (req, res) => {
   res.render("animations");
 });
 
-app.get('/reviewsPosts',
+app.get('/blogPosts',
   async (req,res,next) => {
     try{
       let posts = await Post.find({userId:user_ID}); // lookup the user's entries
-      res.locals.posts = posts;  //make the items available in the view
+      res.locals.posts = posts.reverse();  //make the items available in the view
       res.locals.postsLength = posts.length;
-      res.render("reviewsPosts");  // render to the reviewsPosts page
+      res.render("blogPosts");  // render to the reviewsPosts page
     } catch (e){
       next(e);
     }
   }
   )
 
-app.post('/reviewPost/addReviewPost',
+app.post('/blogPosts/addBlogPost',
   isLoggedIn,
   async (req,res,next) => {
     try{
-      const {title,rating,description} = req.body; // get title, rating, and description from the body
+      const {title,description} = req.body; // get title, rating, and description from the body
       const userId = user_ID;
       const createdAt = new Date(); // get the current date/time
       
-      let data = {userId, title, rating, description, createdAt} // create the data object
+      let data = {userId, title, description, createdAt} // create the data object
       let post = new Post(data) // create the database object (and test the types are correct)
       await post.save() // save the entry in the database
-      res.redirect('/reviewsPosts')  // go back to the reviewPosts page
+      res.redirect('/blogPosts')  // go back to the reviewPosts page
     } catch (e){
       next(e);
     }
   }
   )
 
-  app.get("/reviewPost/delete/:reviewPostId",
+  app.get("/blogPost/delete/:blogPostId",
   isLoggedIn,
   async (req,res,next) => {
     try{
-      const reviewPostId=req.params.reviewPostId; // get the id of the item to delete
-      await Post.deleteOne({_id:reviewPostId}) // remove that item from the database
-      res.redirect('/reviewsPosts') // go back to the todo page
+      const blogPostId=req.params.blogPostId; // get the id of the item to delete
+      await Post.deleteOne({_id:blogPostId}) // remove that item from the database
+      res.redirect('/blogPosts') // go back to the todo page
     } catch (e){
       next(e);
     }

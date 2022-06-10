@@ -11,27 +11,23 @@
         </div>
     </options>
     <optionsButNoBack>
-        <h1 style="font-size:60px; text-decoration: underline; max-width:550px; min-width:550px; resize: none">Reviews & Posts</h1>
+        <h1 style="font-size:60px; text-decoration: underline; width: 550px; text-align:center">Blog Posts</h1>
     </optionsButNoBack>
     <% if (loggedIn) { %>
         <options>
             
                 <% if (postsLength == 1) { %>
-                    <text style="padding:20px; max-width:700px; min-width:700px; resize: none">Welcome Max, you have <%= postsLength %> post.</text>
+                    <text style="padding:20px; width:700px">Welcome Max, you have <%= postsLength %> post.</text>
                 <% } 
                 else { %>
                     <text style="padding:20px">Welcome Max, you have <%= postsLength %> posts.</text>
                 <% } %>
-                <form method="post" action="/reviewPost/addReviewPost" style="display: flex; flex-direction:column; text-align: center; padding:15px;">
+                <form method="post" action="/blogPosts/addBlogPost" style="display: flex; flex-direction:column; text-align: center;">
                     <div style="display:flex; flex-direction:row; margin:auto;">
                         <text>Title:</text>
                         <input type="text" name="title" style="max-width: 150px; margin:auto" required >
                     </div>
-                    <div style="display:flex; flex-direction:row; margin:auto; margin:auto; padding:15px">
-                        <text>Rating 1-5:</text>
-                        <input type="number" name="rating" min=1 max = 5 style="margin:auto" required>
-                    </div>
-                    <text>Description:</text>
+                    <text style="margin-top:15px; margin-bottom:15px">Description:</text>
                     <textarea style="resize: none; margin-top:15px" name="description" rows="20" cols="80" maxlength="4000" required></textarea>
                     <input type="submit" value="Submit Post" style="max-width: 150px; margin:auto; margin-top:30px">
                 </form>
@@ -46,7 +42,7 @@
             </div>
             <text style="font-size:20px; margin-top:20px;margin-bottom:15px; word-wrap: break-word; max-width:1025px;"><%= post.description %></text>
             <% if (loggedIn) { %>
-                <a href="/reviewPost/delete/<%= post._id%>" style="color:red">(Delete)</a>
+                <a href="/blogPost/delete/<%= post._id%>" style="color:red">(Delete)</a>
             <% } %>
         </options><br><br>
     <% }%>
