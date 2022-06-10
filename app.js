@@ -136,6 +136,7 @@ app.get('/reviewsPosts',
     try{
       let posts = await Post.find({userId:user_ID}); // lookup the user's entries
       res.locals.posts = posts;  //make the items available in the view
+      res.locals.postsLength = posts.length;
       res.render("reviewsPosts");  // render to the reviewsPosts page
     } catch (e){
       next(e);
@@ -143,27 +144,29 @@ app.get('/reviewsPosts',
   }
   )
 
-app.post('/post/addPost',
+app.post('/reviewPost/addReviewPost',
   isLoggedIn,
   async (req,res,next) => {
     try{
       const {title,rating,description} = req.body; // get title, rating, and description from the body
+      const userId = user_ID;
       const createdAt = new Date(); // get the current date/time
-      let data = {user_ID, title, rating, description, createdAt} // create the data object
+      let data = {userId, title, rating, description, createdAt} // create the data object
       let post = new Post(data) // create the database object (and test the types are correct)
       await post.save() // save the entry in the database
-      res.redirect('/reviewsPosts')  // go back to the todo page
+      res.redirect('/reviewsPosts')  // go back to the reviewPosts page
     } catch (e){
       next(e);
     }
   }
   )
 
-  app.get("/post/delete/:postId",
+  app.get("/reviewPost/delete/:reviewPostId",
   isLoggedIn,
   async (req,res,next) => {
     try{
-      await Post.deleteOne({_id:postId}) // remove that item from the database
+      const reviewPostId=req.params.reviewPostId; // get the id of the item to delete
+      await Post.deleteOne({_id:reviewPostId}) // remove that item from the database
       res.redirect('/reviewsPosts') // go back to the todo page
     } catch (e){
       next(e);
