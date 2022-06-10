@@ -151,6 +151,7 @@ app.post('/reviewPost/addReviewPost',
       const {title,rating,description} = req.body; // get title, rating, and description from the body
       const userId = user_ID;
       const createdAt = new Date(); // get the current date/time
+      
       let data = {userId, title, rating, description, createdAt} // create the data object
       let post = new Post(data) // create the database object (and test the types are correct)
       await post.save() // save the entry in the database
