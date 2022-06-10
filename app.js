@@ -127,7 +127,6 @@ app.get("/films", (req, res) => {
   res.render("films");
 });
 
-
 app.get("/animations", (req, res) => {
   res.render("animations");
 });
@@ -135,9 +134,7 @@ app.get("/animations", (req, res) => {
 app.get('/reviewsPosts',
   async (req,res,next) => {
     try{
-      let userId = user_ID  // get the user's entries
-      console.log(userId)
-      let posts = await Post.find({userId:userId}); // lookup the user's entries
+      let posts = await Post.find({userId:user_ID}); // lookup the user's entries
       res.locals.posts = posts;  //make the items available in the view
       res.render("reviewsPosts");  // render to the reviewsPosts page
     } catch (e){
@@ -151,9 +148,8 @@ app.post('/post/addPost',
   async (req,res,next) => {
     try{
       const {title,rating,description} = req.body; // get title, rating, and description from the body
-      const userId = res.locals.user._id; // get the user's id
       const createdAt = new Date(); // get the current date/time
-      let data = {userId, title, rating, description, createdAt} // create the data object
+      let data = {user_ID, title, rating, description, createdAt} // create the data object
       let post = new Post(data) // create the database object (and test the types are correct)
       await post.save() // save the entry in the database
       res.redirect('/reviewsPosts')  // go back to the todo page
