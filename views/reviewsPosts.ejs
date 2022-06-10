@@ -9,5 +9,36 @@
             <div id="slide"></div>
             <a href="/index">Back</a><br><br>
         </div>
+    </options><br>
+    <options>
+        <h1 style="font-size:60px">Reviews & Posts</h1>
+        <% if (loggedIn) { %>
+            <%console.log(user._id)%>
+            <text>Welcome Max, you have <%= posts.length %> posts! </text>
+            <form method="post" action="/post/addPost" style="display: flex; flex-direction:column; text-align: center">
+                <text>Title:</text>
+                <input type="text" name="title" required>
+                <text>How would you rate your day? 1 being the worst, 5 being the best:</text>
+                <input type="number" name="rating" min="1" max="5" required>
+                <text>Tell us about your day:</text>
+                <textarea style="resize: none" name="description" rows="10" cols="50" maxlength="5490" required></textarea>
+                <input type="submit" value="Submit Post"><br>
+            </form>
+        <% } %>
+        
+        <div class="p-1 border">
+            <% for (post of posts){%>
+                <div class="mb-2">          
+                    <b class="m-2">Title:</b><%= post.title%><br><br>
+                    <b class="m-2">Rating (1-5):</b><%= post.rating%><br> <br>
+                    <b class="m-2">My Post:</b><br><br>
+                    <i class="m-2"><%= post.description %></i><br> <br>
+                    <b class="m-2">Date created:</b><%= post.createdAt %>
+                    <a href="/post/delete/<%= post._id%>">(Delete)</a>
+                </div>
+                <hr>
+            <% }%>
+        </div>
+     
     </options>
 </body>

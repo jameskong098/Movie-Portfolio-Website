@@ -3,7 +3,7 @@ const mongoose = require( 'mongoose' );
 const Schema = mongoose.Schema;
 const ObjectId = Schema.Types.ObjectId;
 
-var entrySchema = Schema( {
+var postSchema = Schema( {
   userId: ObjectId,
   title: String,
   rating: Number,
@@ -11,4 +11,4 @@ var entrySchema = Schema( {
   createdAt: Date,
 } );
 
-module.exports = mongoose.model( 'Entry', entrySchema );
+module.exports = mongoose.model( 'Post', postSchema );
