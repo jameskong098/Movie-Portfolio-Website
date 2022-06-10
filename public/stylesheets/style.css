@@ -1,6 +1,6 @@
 body {
     height: 100vh;
-    background-image: url('/images/windowsXPwallpaper.jpg');
+    background-image: url('/images/StarryNightSky.jpg');
     background-size: cover;
     background-repeat:repeat;
 }
@@ -14,7 +14,8 @@ options {
     background: rgba(190, 189, 189, 0.5); 
     width: fit-content; 
     margin:auto;
-    resize:none
+    resize:none;
+    color: white;
 }
 
 optionsButNoBack {
@@ -24,6 +25,7 @@ optionsButNoBack {
     align-items: center;
     flex-direction: column;
     resize:none;
+    color: white;
 }
 
 back {
@@ -44,7 +46,7 @@ https://codepen.io/atloomer
 */
 
 a {
-    color: black;
+    color: white;
     text-decoration: none;
     letter-spacing: 1px;
 }
@@ -53,7 +55,7 @@ a {
     display: inline-flex;
     height: 50px;
     width: 280px;
-    border: 2px solid black;
+    border: 2px solid white;
     margin: 20px 20px 20px 20px;
     color: #BFC0C0;
     text-transform: uppercase;
