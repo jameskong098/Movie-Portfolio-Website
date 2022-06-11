@@ -39,7 +39,7 @@
                 <iframe title="vimeo-player" src="<%= animations[i].hrefLink%>" width="640" height="360" frameborder="0" allowfullscreen></iframe>
             </options>
             <options style="padding:15px">
-                <text style="font-size:20px; word-wrap: break-word; width:600px; text-align:center"><%= animation[i].description %></text>
+                <text style="font-size:20px; word-wrap: break-word; width:600px; text-align:center"><%= animations[i].description %></text>
                 <% if (loggedIn) { %>
                     <a style="margin-top:15px; color: red" href="/animations/delete/<%= animations[i]._id%>">(Delete)</a>
                 <% } %>
