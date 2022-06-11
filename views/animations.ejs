@@ -29,7 +29,7 @@
                 <% } %>
                 <text style="margin-top:15px; margin-bottom:15px">Description:</text>
                 <textarea style="resize: none; margin-top:15px" name="description" rows="20" cols="80" maxlength="4000" required></textarea>
-                <input type="submit" value="Submit Post" style="max-width: 150px; margin:auto; margin-top:30px">
+                <input id="test" type="submit" value="Submit Post" style="max-width: 150px; margin:auto; margin-top:30px">
             </form>  
         </options><br><br>
     <% } %>
@@ -38,12 +38,29 @@
             <options style="padding:15px; margin-bottom:25px">
                 <iframe title="vimeo-player" src="<%= animations[i].hrefLink%>" width="640" height="360" frameborder="0" allowfullscreen></iframe>
             </options>
-            <options style="padding:15px">
-                <text style="font-size:20px; word-wrap: break-word; width:600px; text-align:center"><%= animations[i].description %></text>
-                <% if (loggedIn) { %>
-                    <a style="margin-top:15px; color: red" href="/animations/delete/<%= animations[i]._id%>">(Delete)</a>
-                <% } %>
-            </options>
+            <form method="post" action="/animations/edit/save">
+                <options style="padding:15px">
+                    <% if (!edit) { %>
+                        <text id="desc" style="font-size:20px; word-wrap: break-word; width:600px; text-align:center"><%= animations[i].description %></text>
+                    <% }
+                    else if (animations[i]._id == animationID) { %>
+                        <textarea style="resize: none; margin-top:15px" name="description" rows="20" cols="80" maxlength="4000" required><%= animations[i].description%></textarea>
+                        <input type="hidden" name="animationId" value="<%= animations[i]._id%>">
+                    <% } %>
+                    <% if (loggedIn) { %>
+                        <div style="display:flex; flex-direction:row; margin-top:15px; color: white">
+                            <a style="margin-right: 50" href="/animations/delete/<%= animations[i]._id%>">Delete</a>
+                            <% if (!edit) { %>
+                                <a id="editBox" href="/animations/edit/<%= animations[i]._id%>">Edit</a>
+                            <% } %>
+                            <% if (edit && animations[i]._id == animationID) { %>
+                                <button class="b1" type="submit" style="background:none; border:none; cursor:pointer;">Save</button>
+                                <a style="margin-left: 50px" href="/animations">Cancel</a>
+                            <% } %>
+                        </div>
+                    <% } %>
+                </options>
+            </form>
         </optionsButNoBack><br><br>
         <% if (i != animationsLength - 1) { %>
             <hr style="color:white; width: 450px"><br><br>

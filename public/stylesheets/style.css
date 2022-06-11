@@ -18,6 +18,29 @@ options {
     color: white;
 }
 
+.options {
+    font-size:40px;
+    font-family:'Courier New', Courier, monospace;
+    display:flex;
+    align-items: center;
+    flex-direction: column;
+    background: rgba(190, 189, 189, 0.5); 
+    width: fit-content; 
+    margin:auto;
+    resize:none;
+    color: white;
+}
+
+.b1 {
+    font-size:40px;
+    font-family:'Courier New', Courier, monospace;
+    display:flex;
+    align-items: center;
+    flex-direction: column;
+    resize:none;
+    color: white;
+}
+
 optionsButNoBack {
     font-size:40px;
     font-family:'Courier New', Courier, monospace;

@@ -142,6 +142,8 @@ app.get('/animations',
       res.locals.animations = animations.reverse();  //make the items available in the view
       res.locals.animationsLength = animations.length;
       res.locals.invalidURL = false
+      res.locals.edit = false;
+      res.locals.animationID = ""
       res.render("animations");  // render to the reviewsPosts page
     } catch (e){
       next(e);
@@ -155,7 +157,9 @@ app.post('/animations/addAnimation',
     try{
       const {hrefLink,description} = req.body; // get hrefLink and description from the body
       if (!stringIsAValidUrl(hrefLink)) {
-        res.locals.invalidURL = true
+        res.locals.invalidURL = true;
+        res.locals.edit = false;
+        res.locals.animationID = ""
         let animations = await Animation.find({userId:user_ID}); // lookup the user's entries
         res.locals.animations = animations.reverse();  //make the items available in the view
         res.locals.animationsLength = animations.length;
@@ -188,6 +192,36 @@ app.get("/animations/delete/:animationId",
   }
 )
 
+app.get("/animations/edit/:animationId",
+  isLoggedIn,
+  async (req,res,next) => {
+    try{
+      let animations = await Animation.find({userId:user_ID}); // lookup the user's entries
+      res.locals.animations = animations.reverse();  //make the items available in the view
+      res.locals.animationsLength = animations.length;
+      res.locals.invalidURL = false
+      res.locals.animationID = req.params.animationId;
+      res.locals.edit = true;
+      res.render("animations");
+    } catch (e){
+      next(e);
+    }
+  }
+)
+
+app.post("/animations/edit/save",
+  isLoggedIn,
+  async (req,res,next) => {
+    try{
+      const {animationId, description} = req.body;
+      await Animation.findOneAndUpdate({_id:animationId}, {description: description}) // update that item in the database
+      res.redirect('/animations') // go back to the animations page
+    } catch (e){
+      next(e);
+    }
+  }
+)
+
 app.get('/films',
   async (req,res,next) => {
     try{
@@ -195,6 +229,8 @@ app.get('/films',
       res.locals.films = films.reverse();  //make the items available in the view
       res.locals.filmsLength = films.length;
       res.locals.invalidURL = false
+      res.locals.edit = false;
+      res.locals.filmID = ""
       res.render("films");  // render to the films page
     } catch (e){
       next(e);
@@ -234,6 +270,36 @@ app.get("/films/delete/:filmId",
     try{
       const filmId=req.params.filmId; // get the id of the item to delete
       await Film.deleteOne({_id:filmId}) // remove that item from the database
+      res.redirect('/films') // go back to the animations page
+    } catch (e){
+      next(e);
+    }
+  }
+)
+
+app.get("/films/edit/:filmId",
+  isLoggedIn,
+  async (req,res,next) => {
+    try{
+      let films = await Film.find({userId:user_ID}); // lookup the user's entries
+      res.locals.films = films.reverse();  //make the items available in the view
+      res.locals.filmsLength = films.length;
+      res.locals.invalidURL = false
+      res.locals.filmID = req.params.filmId;
+      res.locals.edit = true;
+      res.render("films");
+    } catch (e){
+      next(e);
+    }
+  }
+)
+
+app.post("/films/edit/save",
+  isLoggedIn,
+  async (req,res,next) => {
+    try{
+      const {filmId, description} = req.body;
+      await Film.findOneAndUpdate({_id:filmId}, {description: description}) // update that item in the database
       res.redirect('/films') // go back to the animations page
     } catch (e){
       next(e);
