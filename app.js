@@ -135,10 +135,6 @@ app.get("/index", (req, res) => {
   res.render("index");
 });
 
-app.get("/films", (req, res) => {
-  res.render("films");
-});
-
 app.get('/animations',
   async (req,res,next) => {
     try{
@@ -157,7 +153,7 @@ app.post('/animations/addAnimation',
   isLoggedIn,
   async (req,res,next) => {
     try{
-      const {hrefLink,description} = req.body; // get title, rating, and description from the body
+      const {hrefLink,description} = req.body; // get hrefLink and description from the body
       if (!stringIsAValidUrl(hrefLink)) {
         res.locals.invalidURL = true
         let animations = await Animation.find({userId:user_ID}); // lookup the user's entries
@@ -171,13 +167,13 @@ app.post('/animations/addAnimation',
         let data = {userId, hrefLink, description} // create the data object
         let animation = new Animation(data) // create the database object (and test the types are correct)
         await animation.save() // save the entry in the database
-        res.redirect('/animations')  // go back to the reviewPosts page
+        res.redirect('/animations')  // go back to the animations page
       }
     } catch (e){
       next(e);
     }
   }
-  )
+)
 
 app.get("/animations/delete/:animationId",
   isLoggedIn,
@@ -185,7 +181,60 @@ app.get("/animations/delete/:animationId",
     try{
       const animationId=req.params.animationId; // get the id of the item to delete
       await Animation.deleteOne({_id:animationId}) // remove that item from the database
-      res.redirect('/animations') // go back to the todo page
+      res.redirect('/animations') // go back to the animations page
+    } catch (e){
+      next(e);
+    }
+  }
+)
+
+app.get('/films',
+  async (req,res,next) => {
+    try{
+      let films = await Film.find({userId:user_ID}); // lookup the user's entries
+      res.locals.films = films.reverse();  //make the items available in the view
+      res.locals.filmsLength = films.length;
+      res.locals.invalidURL = false
+      res.render("films");  // render to the films page
+    } catch (e){
+      next(e);
+    }
+  }
+)
+
+app.post('/films/addFilm',
+  isLoggedIn,
+  async (req,res,next) => {
+    try{
+      const {hrefLink,description} = req.body; // get hrefLink and description from the body
+      if (!stringIsAValidUrl(hrefLink)) {
+        res.locals.invalidURL = true
+        let films = await Film.find({userId:user_ID}); // lookup the user's entries
+        res.locals.films = films.reverse();  //make the items available in the view
+        res.locals.filmsLength = films.length;
+        res.render("films")
+      }
+      else {
+        const userId = user_ID;
+
+        let data = {userId, hrefLink, description} // create the data object
+        let film = new Film(data) // create the database object (and test the types are correct)
+        await film.save() // save the entry in the database
+        res.redirect('/films')  // go back to the animations page
+      }
+    } catch (e){
+      next(e);
+    }
+  }
+)
+
+app.get("/films/delete/:filmId",
+  isLoggedIn,
+  async (req,res,next) => {
+    try{
+      const filmId=req.params.filmId; // get the id of the item to delete
+      await Film.deleteOne({_id:filmId}) // remove that item from the database
+      res.redirect('/films') // go back to the animations page
     } catch (e){
       next(e);
     }
@@ -198,7 +247,7 @@ app.get('/blogPosts',
       let posts = await Post.find({userId:user_ID}); // lookup the user's entries
       res.locals.posts = posts.reverse();  //make the items available in the view
       res.locals.postsLength = posts.length;
-      res.render("blogPosts");  // render to the reviewsPosts page
+      res.render("blogPosts");  // render to the blogPosts page
     } catch (e){
       next(e);
     }
@@ -216,12 +265,12 @@ app.post('/blogPosts/addBlogPost',
       let data = {userId, title, description, createdAt} // create the data object
       let post = new Post(data) // create the database object (and test the types are correct)
       await post.save() // save the entry in the database
-      res.redirect('/blogPosts')  // go back to the reviewPosts page
+      res.redirect('/blogPosts')  // go back to the blogPosts page
     } catch (e){
       next(e);
     }
   }
-  )
+)
 
   app.get("/blogPost/delete/:blogPostId",
   isLoggedIn,
@@ -229,7 +278,7 @@ app.post('/blogPosts/addBlogPost',
     try{
       const blogPostId=req.params.blogPostId; // get the id of the item to delete
       await Post.deleteOne({_id:blogPostId}) // remove that item from the database
-      res.redirect('/blogPosts') // go back to the todo page
+      res.redirect('/blogPosts') // go back to the blogPost page
     } catch (e){
       next(e);
     }
