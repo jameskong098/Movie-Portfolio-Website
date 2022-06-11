@@ -33,13 +33,20 @@
             </form>  
         </options><br><br>
     <% } %>
-    <% for (film of films){%>
-        <options style="width:1100px; resize: none">
-            <iframe title="vimeo-player" src="<%= film.hrefLink%>" width="640" height="360" frameborder="0" allowfullscreen></iframe>
-            <text style="font-size:20px; margin-top:20px;margin-bottom:15px; word-wrap: break-word; max-width:1025px;"><%= film.description %></text>
-            <% if (loggedIn) { %>
-                <a href="/films/delete/<%= film._id%>" style="color:red">(Delete)</a>
-            <% } %>
-        </options><br><br>
+    <% for (i=0; i<filmsLength; i++){%>
+        <optionsButNoBack>
+            <options style="padding:15px; margin-bottom:25px">
+                <iframe title="vimeo-player" src="<%= films[i].hrefLink%>" width="640" height="360" frameborder="0" allowfullscreen></iframe>
+            </options>
+            <options style="padding:15px">
+                <text style="font-size:20px; word-wrap: break-word; width:600px; text-align:center"><%= films[i].description %></text>
+                <% if (loggedIn) { %>
+                    <a style="margin-top:15px; color: red" href="/films/delete/<%= films[i]._id%>">(Delete)</a>
+                <% } %>
+            </options>
+        </optionsButNoBack><br><br>
+        <% if (i != filmsLength - 1) { %>
+            <hr style="color:white; width: 450px"><br><br>
+        <% } %>
     <% }%>
 </body>
