@@ -16,16 +16,17 @@
     <% if (loggedIn) { %>
         <options>
             <% if (animationsLength == 1) { %>
-                <text style="padding:20px; width:700px">Welcome Max, you have <%= animationsLength %> animations.</text>
+                <text style="padding:20px; width:900px; text-align:center">Welcome Max, you have <%= animationsLength %> animation.</text>
             <% } 
             else { %>
-                <text style="padding:20px">Welcome Max, you have <%= animationLength %> animations.</text>
+                <text style="padding:20px">Welcome Max, you have <%= animationsLength %> animations.</text>
             <% } %>
             <form method="post" action="/animations/addAnimation" style="display: flex; flex-direction:column; text-align: center;">
-                <div style="display:flex; flex-direction:row; margin:auto;">
-                    <text>Enter embedded video href Link:</text>
-                    <input type="text" name="title" style="max-width: 150px; margin:auto" required >
-                </div>
+                <text style="margin-bottom:15px">Embedded video href Link:</text>
+                <input type="text" name="hrefLink" style="width: 500px; margin:auto" required >
+                <% if (invalidURL) { %>
+                    <a style="font-size:15px; margin-top:25px">Invalid URL. Try Again!</a>
+                <% } %>
                 <text style="margin-top:15px; margin-bottom:15px">Description:</text>
                 <textarea style="resize: none; margin-top:15px" name="description" rows="20" cols="80" maxlength="4000" required></textarea>
                 <input type="submit" value="Submit Post" style="max-width: 150px; margin:auto; margin-top:30px">

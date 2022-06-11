@@ -113,6 +113,18 @@ const isLoggedIn = (req,res,next) => {
   else res.redirect('/login')
 }
 
+// URL Validation to check for embedded video link
+const URL = require("url").URL;
+
+const stringIsAValidUrl = (s) => {
+  try {
+    new URL(s);
+    return true;
+  } catch (err) {
+    return false;
+  }
+};
+
 // specify that the server should render the views/index.ejs page for the root path
 
 app.get("/", (req, res) => {
@@ -133,6 +145,7 @@ app.get('/animations',
       let animations = await Animation.find({userId:user_ID}); // lookup the user's entries
       res.locals.animations = animations.reverse();  //make the items available in the view
       res.locals.animationsLength = animations.length;
+      res.locals.invalidURL = false
       res.render("animations");  // render to the reviewsPosts page
     } catch (e){
       next(e);
@@ -145,12 +158,21 @@ app.post('/animations/addAnimation',
   async (req,res,next) => {
     try{
       const {hrefLink,description} = req.body; // get title, rating, and description from the body
-      const userId = user_ID;
-      
-      let data = {userId, hrefLink, description} // create the data object
-      let animation = new Animation(data) // create the database object (and test the types are correct)
-      await animation.save() // save the entry in the database
-      res.redirect('/animations')  // go back to the reviewPosts page
+      if (!stringIsAValidUrl(hrefLink)) {
+        res.locals.invalidURL = true
+        let animations = await Animation.find({userId:user_ID}); // lookup the user's entries
+        res.locals.animations = animations.reverse();  //make the items available in the view
+        res.locals.animationsLength = animations.length;
+        res.render("animations")
+      }
+      else {
+        const userId = user_ID;
+
+        let data = {userId, hrefLink, description} // create the data object
+        let animation = new Animation(data) // create the database object (and test the types are correct)
+        await animation.save() // save the entry in the database
+        res.redirect('/animations')  // go back to the reviewPosts page
+      }
     } catch (e){
       next(e);
     }
@@ -254,6 +276,7 @@ const { reset } = require("nodemon");
 const Animation = require("./models/Animation");
 const Film = require("./models/Film");
 const Post = require("./models/Post");
+const e = require("connect-flash");
 const server = http.createServer(app);
 
 server.listen(port);
