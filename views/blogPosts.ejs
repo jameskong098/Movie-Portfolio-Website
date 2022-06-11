@@ -15,7 +15,6 @@
     </optionsButNoBack>
     <% if (loggedIn) { %>
         <options>
-            
                 <% if (postsLength == 1) { %>
                     <text style="padding:20px; width:700px">Welcome Max, you have <%= postsLength %> post.</text>
                 <% } 
@@ -31,7 +30,6 @@
                     <textarea style="resize: none; margin-top:15px" name="description" rows="20" cols="80" maxlength="4000" required></textarea>
                     <input type="submit" value="Submit Post" style="max-width: 150px; margin:auto; margin-top:30px">
                 </form>
-            
         </options><br><br>
     <% } %>
     <% for (post of posts){%>

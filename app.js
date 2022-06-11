@@ -127,9 +127,48 @@ app.get("/films", (req, res) => {
   res.render("films");
 });
 
-app.get("/animations", (req, res) => {
-  res.render("animations");
-});
+app.get('/animations',
+  async (req,res,next) => {
+    try{
+      let animations = await Animation.find({userId:user_ID}); // lookup the user's entries
+      res.locals.animations = animations.reverse();  //make the items available in the view
+      res.locals.animationsLength = animations.length;
+      res.render("animations");  // render to the reviewsPosts page
+    } catch (e){
+      next(e);
+    }
+  }
+)
+
+app.post('/animations/addAnimation',
+  isLoggedIn,
+  async (req,res,next) => {
+    try{
+      const {hrefLink,description} = req.body; // get title, rating, and description from the body
+      const userId = user_ID;
+      
+      let data = {userId, hrefLink, description} // create the data object
+      let animation = new Animation(data) // create the database object (and test the types are correct)
+      await animation.save() // save the entry in the database
+      res.redirect('/animations')  // go back to the reviewPosts page
+    } catch (e){
+      next(e);
+    }
+  }
+  )
+
+app.get("/animations/delete/:animationId",
+  isLoggedIn,
+  async (req,res,next) => {
+    try{
+      const animationId=req.params.animationId; // get the id of the item to delete
+      await Animation.deleteOne({_id:animationId}) // remove that item from the database
+      res.redirect('/animations') // go back to the todo page
+    } catch (e){
+      next(e);
+    }
+  }
+)
 
 app.get('/blogPosts',
   async (req,res,next) => {
@@ -142,7 +181,7 @@ app.get('/blogPosts',
       next(e);
     }
   }
-  )
+)
 
 app.post('/blogPosts/addBlogPost',
   isLoggedIn,
@@ -212,7 +251,8 @@ app.set("port", port);
 // and now we startup the server listening on that port
 const http = require("http");
 const { reset } = require("nodemon");
-const Diary = require("./models/Post");
+const Animation = require("./models/Animation");
+const Film = require("./models/Film");
 const Post = require("./models/Post");
 const server = http.createServer(app);
 

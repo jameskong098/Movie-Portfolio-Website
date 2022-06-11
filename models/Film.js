@@ -5,9 +5,8 @@ const ObjectId = Schema.Types.ObjectId;
 
 var FilmSchema = Schema( {
   userId: ObjectId,
-  title: String,
+  hrefLink: String,
   description:String,
-  createdAt: Date,
 } );
 
-module.exports = mongoose.model( 'Film', filmSchema );
+module.exports = mongoose.model( 'Film', FilmSchema );
