@@ -11,7 +11,7 @@
         </div>
     </options>
     <optionsButNoBack>
-        <h1 style="font-size:60px; text-decoration: underline; width: 550px; text-align:center">Blog Posts (<%=blogPostsLength%>)</h1>
+        <h1 class="pageTitle">Blog Posts (<%=blogPostsLength%>)</h1>
     </optionsButNoBack>
     <% if (loggedIn) { %>
         <options>
@@ -57,7 +57,7 @@
             </options>
         </form><br><br>
         <% if (i != blogPostsLength - 1) { %>
-            <hr style="color:white; width: 450px"><br><br>
+            <hr class="lineSep"><br><br>
         <% } %>
     <% }%>
 </body>
