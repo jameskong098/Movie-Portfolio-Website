@@ -245,6 +245,7 @@ app.post('/films/addFilm',
       const {hrefLink,description} = req.body; // get hrefLink and description from the body
       if (!stringIsAValidUrl(hrefLink)) {
         res.locals.invalidURL = true
+        res.locals.edit = false;
         let films = await Film.find({userId:user_ID}); // lookup the user's entries
         res.locals.films = films.reverse();  //make the items available in the view
         res.locals.filmsLength = films.length;
