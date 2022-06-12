@@ -77,7 +77,7 @@ options {
     align-items: center;
     flex-direction: column;
     resize:none;
-    color: black
+    color: white
 }
 
 optionsButNoBack {
