@@ -18,6 +18,11 @@ options {
     color: white;
 }
 
+.textFormat {
+    word-wrap: break-word; 
+    white-space: break-spaces;
+}
+
 .options {
     font-size:40px;
     font-family:'Courier New', Courier, monospace;

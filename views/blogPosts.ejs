@@ -40,7 +40,7 @@
                         <i style="font-size:40px; text-decoration: underline"><%= blogPosts[i].title%></i>
                         <text style="margin-left: 300px; font-size:39px"><%= blogPosts[i].createdAt.toDateString() %></text>
                     </div>
-                    <text style="font-size:20px; margin-top:20px;margin-bottom:15px; word-wrap: break-word; max-width:1025px;"><%= blogPosts[i].description %></text>
+                    <text class="textFormat" style="font-size:20px; margin-top:20px;margin-bottom:15px; max-width:1025px;"><%= blogPosts[i].description %></text>
                 <% }
                 else { %>
                     <textarea name="title" style="width: 250px; height: 30px; margin:auto; resize:none; margin-top:15px" required><%= blogPosts[i].title%></textarea>
@@ -49,13 +49,13 @@
                 <% } %>
                 <% if (loggedIn) { %>
                     <div style="display:flex; flex-direction:row; margin-top:15px; margin-bottom:5px; color: white">
-                        <a style="margin-right: 80" href="/blogPosts/delete/<%= blogPosts[i]._id%>">Delete</a>
+                        <a style="margin-right: 80" href="/blogPosts/delete/<%= blogPosts[i]._id%>">[Delete]</a>
                         <% if (!edit || blogPosts[i]._id != blogPostId) { %>
-                            <a href="/blogPosts/edit/<%= blogPosts[i]._id%>">Edit</a>
+                            <a href="/blogPosts/edit/<%= blogPosts[i]._id%>">[Edit]</a>
                         <% } %>
                         <% if (edit && blogPosts[i]._id == blogPostId) { %>
-                            <button class="b1" type="submit" style="background:none; border:none; cursor:pointer;">Save</button>
-                            <a style="margin-left: 80px" href="/blogPosts">Cancel</a>
+                            <button class="b1" type="submit" style="background:none; border:none; cursor:pointer;">[Save]</button>
+                            <a style="margin-left: 80px" href="/blogPosts">[Cancel]</a>
                         <% } %>
                     </div>
                 <% } %>

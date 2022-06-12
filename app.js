@@ -382,9 +382,45 @@ app.post("/blogPosts/edit/save",
   }
 )
 
-app.get("/about", (req, res) => {
-  res.render("about");
-});
+app.get('/about',
+  async (req,res,next) => {
+    try{
+      let about = await About.find({userId:user_ID}); // lookup the user's entries
+      res.locals.about = about;  //make the items available in the view
+      res.locals.edit = false;
+      res.render("about");  // render to the about page
+    } catch (e){
+      next(e);
+    }
+  }
+)
+
+app.get("/about/edit",
+  isLoggedIn,
+  async (req,res,next) => {
+    try{
+      let about = await About.find({userId:user_ID}); // lookup the user's entries
+      res.locals.about = about;  //make the items available in the view
+      res.locals.edit = true;
+      res.render("about"); // render to the about page
+    } catch (e){
+      next(e);
+    }
+  }
+)
+
+app.post("/about/edit/save",
+  isLoggedIn,
+  async (req,res,next) => {
+    try{
+      const {aboutId, description} = req.body;
+      await About.findOneAndUpdate({_id:aboutId}, {description: description}) // update that item in the database
+      res.redirect('/about') // go back to the about page
+    } catch (e){
+      next(e);
+    }
+  }
+)
 
 app.get("/aboutDeveloper", (req, res) => {
   res.render("aboutDeveloper");
@@ -422,6 +458,7 @@ const { reset } = require("nodemon");
 const Animation = require("./models/Animation");
 const Film = require("./models/Film");
 const Post = require("./models/Post");
+const About = require("./models/About")
 const e = require("connect-flash");
 const server = http.createServer(app);
 
