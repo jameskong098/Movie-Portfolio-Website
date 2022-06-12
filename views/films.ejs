@@ -30,7 +30,7 @@
     <% } %>
     <% for (i=0; i<filmsLength; i++){%>
         <optionsButNoBack>
-            <options style="padding:15px; margin-bottom:25px">
+            <options class="vidOptions" style="padding:15px; margin-bottom:25px">
                 <iframe title="vimeo-player" src="<%= films[i].hrefLink%>" width="640" height="360" frameborder="0" allowfullscreen></iframe>
             </options>
             <form method="post" action="/films/edit/save">
