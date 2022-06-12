@@ -15,12 +15,7 @@
     </optionsButNoBack>
     <% if (loggedIn) { %>
         <options>
-            <% if (animationsLength == 1) { %>
-                <text style="padding:20px; width:900px; text-align:center">Welcome Max, you have <%= animationsLength %> animation.</text>
-            <% } 
-            else { %>
-                <text style="padding:20px">Welcome Max, you have <%= animationsLength %> animations.</text>
-            <% } %>
+            <text style="padding:20px">Welcome Max, Upload an animation below!</text>
             <form method="post" action="/animations/addAnimation" style="display: flex; flex-direction:column; text-align: center;">
                 <text style="margin-bottom:15px">Embedded video href Link:</text>
                 <input type="text" name="hrefLink" style="width: 500px; margin:auto" required >

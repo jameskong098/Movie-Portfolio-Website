@@ -15,21 +15,16 @@
     </optionsButNoBack>
     <% if (loggedIn) { %>
         <options>
-                <% if (blogPostsLength == 1) { %>
-                    <text style="padding:20px; width:700px">Welcome Max, you have <%= blogPostsLength %> post.</text>
-                <% } 
-                else { %>
-                    <text style="padding:20px">Welcome Max, you have <%= blogPostsLength %> posts.</text>
-                <% } %>
-                <form method="post" action="/blogPosts/addBlogPost" style="display: flex; flex-direction:column; text-align: center;">
-                    <div style="display:flex; flex-direction:row; margin:auto;">
-                        <text>Title:</text>
-                        <input type="text" name="title" style="max-width: 150px; margin:auto" required >
-                    </div>
-                    <text style="margin-top:15px; margin-bottom:15px">Description:</text>
-                    <textarea style="resize: none; margin-top:15px" name="description" rows="20" cols="80" maxlength="4000" required></textarea>
-                    <button class="b1" type="submit" style="background:none; border:none; cursor:pointer; margin-top:25px">Save</button>
-                </form>
+            <text style="padding:20px">Welcome Max, Upload a blog post below!</text>
+            <form method="post" action="/blogPosts/addBlogPost" style="display: flex; flex-direction:column; text-align: center;">
+                <div style="display:flex; flex-direction:row; margin:auto;">
+                    <text>Title:</text>
+                    <input type="text" name="title" style="max-width: 150px; margin:auto" required >
+                </div>
+                <text style="margin-top:15px; margin-bottom:15px">Description:</text>
+                <textarea style="resize: none; margin-top:15px" name="description" rows="20" cols="80" maxlength="4000" required></textarea>
+                <button class="b1" type="submit" style="background:none; border:none; cursor:pointer; margin-top:25px">[Save]</button>
+            </form>
         </options><br><br>
     <% } %>
     <% for (i=0; i<blogPostsLength; i++){%>
