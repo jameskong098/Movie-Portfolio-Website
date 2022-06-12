@@ -310,9 +310,11 @@ app.post("/films/edit/save",
 app.get('/blogPosts',
   async (req,res,next) => {
     try{
-      let posts = await Post.find({userId:user_ID}); // lookup the user's entries
-      res.locals.posts = posts.reverse();  //make the items available in the view
-      res.locals.postsLength = posts.length;
+      let blogPosts = await Post.find({userId:user_ID}); // lookup the user's entries
+      res.locals.blogPosts = blogPosts.reverse();  //make the items available in the view
+      res.locals.blogPostsLength = blogPosts.length;
+      res.locals.blogPostID = "";
+      res.locals.edit = false;
       res.render("blogPosts");  // render to the blogPosts page
     } catch (e){
       next(e);
@@ -338,13 +340,42 @@ app.post('/blogPosts/addBlogPost',
   }
 )
 
-  app.get("/blogPost/delete/:blogPostId",
+  app.get("/blogPosts/delete/:blogPostId",
   isLoggedIn,
   async (req,res,next) => {
     try{
       const blogPostId=req.params.blogPostId; // get the id of the item to delete
       await Post.deleteOne({_id:blogPostId}) // remove that item from the database
       res.redirect('/blogPosts') // go back to the blogPost page
+    } catch (e){
+      next(e);
+    }
+  }
+)
+
+app.get("/blogPosts/edit/:blogPostId",
+  isLoggedIn,
+  async (req,res,next) => {
+    try{
+      let blogPosts = await Post.find({userId:user_ID}); // lookup the user's entries
+      res.locals.blogPosts = blogPosts.reverse();  //make the items available in the view
+      res.locals.blogPostsLength = blogPosts.length;
+      res.locals.blogPostId = req.params.blogPostId;
+      res.locals.edit = true;
+      res.render("blogPosts");
+    } catch (e){
+      next(e);
+    }
+  }
+)
+
+app.post("/blogPosts/edit/save",
+  isLoggedIn,
+  async (req,res,next) => {
+    try{
+      const {postId, title, description} = req.body;
+      await Post.findOneAndUpdate({_id:postId}, {title: title, description: description}) // update that item in the database
+      res.redirect('/blogPosts') // go back to the blogPosts
     } catch (e){
       next(e);
     }

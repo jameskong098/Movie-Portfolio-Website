@@ -15,11 +15,11 @@
     </optionsButNoBack>
     <% if (loggedIn) { %>
         <options>
-                <% if (postsLength == 1) { %>
-                    <text style="padding:20px; width:700px">Welcome Max, you have <%= postsLength %> post.</text>
+                <% if (blogPostsLength == 1) { %>
+                    <text style="padding:20px; width:700px">Welcome Max, you have <%= blogPostsLength %> post.</text>
                 <% } 
                 else { %>
-                    <text style="padding:20px">Welcome Max, you have <%= postsLength %> posts.</text>
+                    <text style="padding:20px">Welcome Max, you have <%= blogPostsLength %> posts.</text>
                 <% } %>
                 <form method="post" action="/blogPosts/addBlogPost" style="display: flex; flex-direction:column; text-align: center;">
                     <div style="display:flex; flex-direction:row; margin:auto;">
@@ -28,20 +28,41 @@
                     </div>
                     <text style="margin-top:15px; margin-bottom:15px">Description:</text>
                     <textarea style="resize: none; margin-top:15px" name="description" rows="20" cols="80" maxlength="4000" required></textarea>
-                    <input type="submit" value="Submit Post" style="max-width: 150px; margin:auto; margin-top:30px">
+                    <button class="b1" type="submit" style="background:none; border:none; cursor:pointer; margin-top:25px">Save</button>
                 </form>
         </options><br><br>
     <% } %>
-    <% for (post of posts){%>
-        <options style="width:1100px; resize: none">
-            <div style="display:flex; flex-direction:row; margin-top:15px;">
-                <i style="font-size:40px; text-decoration: underline"><%= post.title%></i>
-                <text style="margin-left: 300px; font-size:39px"><%= post.createdAt.toDateString() %></text>
-            </div>
-            <text style="font-size:20px; margin-top:20px;margin-bottom:15px; word-wrap: break-word; max-width:1025px;"><%= post.description %></text>
-            <% if (loggedIn) { %>
-                <a href="/blogPost/delete/<%= post._id%>" style="color:red">(Delete)</a>
-            <% } %>
-        </options><br><br>
+    <% for (i=0; i<blogPostsLength; i++){%>
+        <form method="post" action="/blogPosts/edit/save">
+            <options style="width:1100px; resize: none">
+                <% if (!edit || blogPosts[i]._id != blogPostId) { %>
+                    <div style="display:flex; flex-direction:row; margin-top:15px;">
+                        <i style="font-size:40px; text-decoration: underline"><%= blogPosts[i].title%></i>
+                        <text style="margin-left: 300px; font-size:39px"><%= blogPosts[i].createdAt.toDateString() %></text>
+                    </div>
+                    <text style="font-size:20px; margin-top:20px;margin-bottom:15px; word-wrap: break-word; max-width:1025px;"><%= blogPosts[i].description %></text>
+                <% }
+                else { %>
+                    <textarea name="title" style="width: 250px; height: 30px; margin:auto; resize:none; margin-top:15px" required><%= blogPosts[i].title%></textarea>
+                    <textarea style="resize: none; margin-top:15px" name="description" rows="20" cols="80" maxlength="4000" required><%= blogPosts[i].description%></textarea>
+                    <input type="hidden" name="postId" value="<%= blogPosts[i]._id%>">
+                <% } %>
+                <% if (loggedIn) { %>
+                    <div style="display:flex; flex-direction:row; margin-top:15px; margin-bottom:5px; color: white">
+                        <a style="margin-right: 80" href="/blogPosts/delete/<%= blogPosts[i]._id%>">Delete</a>
+                        <% if (!edit || blogPosts[i]._id != blogPostId) { %>
+                            <a href="/blogPosts/edit/<%= blogPosts[i]._id%>">Edit</a>
+                        <% } %>
+                        <% if (edit && blogPosts[i]._id == blogPostId) { %>
+                            <button class="b1" type="submit" style="background:none; border:none; cursor:pointer;">Save</button>
+                            <a style="margin-left: 80px" href="/blogPosts">Cancel</a>
+                        <% } %>
+                    </div>
+                <% } %>
+            </options>
+        </form><br><br>
+        <% if (i != blogPostsLength - 1) { %>
+            <hr style="color:white; width: 450px"><br><br>
+        <% } %>
     <% }%>
 </body>
