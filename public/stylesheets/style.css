@@ -1,13 +1,13 @@
 body {
     height: 100vh;
-    background-image: url('/images/windowsXPwallpaper.jpg');
+    background-image: url('/images/StarryNightSky.jpg');
     background-size: cover;
     background-repeat:no-repeat;
     background-attachment: fixed;
 }
 
 .lineSep {
-    border-color:black; 
+    border-color:white;
     width: 450px
 }
 
@@ -16,14 +16,14 @@ body {
     text-decoration: underline; 
     width: 550px; 
     text-align:center; 
-    color:black
+    color:white;
 }
 
 .aboutTitle {
     text-decoration:underline; 
     width: 600px; 
     text-align:center; 
-    color:black
+    color:white
 }
 
 .vidOptions {
@@ -36,7 +36,7 @@ body {
     width: fit-content; 
     margin:auto;
     resize:none;
-    color: black
+    color: white
 }
 
 options {
@@ -45,7 +45,7 @@ options {
     display:flex;
     align-items: center;
     flex-direction: column;
-    background: rgba(0, 0, 0, 0.6); 
+    background: rgba(255, 255, 255, 0.6); 
     width: fit-content; 
     margin:auto;
     resize:none;
@@ -67,7 +67,7 @@ options {
     width: fit-content; 
     margin:auto;
     resize:none;
-    color: black
+    color: white
 }
 
 .b1 {
@@ -108,7 +108,7 @@ https://codepen.io/atloomer
 */
 
 a {
-    color: white;
+    color: black;
     text-decoration: none;
     letter-spacing: 1px;
 }
@@ -135,7 +135,7 @@ a {
     width: 280px;
     border: 2px solid white;
     margin: 20px 20px 20px 20px;
-    color: #BFC0C0;
+    color: black;
     text-transform: uppercase;
     text-decoration: none;
     font-size: .8em;
@@ -152,6 +152,7 @@ a {
 }
   
 #button-2 a {
+    color:black;
     position: relative;
     transition: all .35s ease-Out;
 }
@@ -160,7 +161,7 @@ a {
     width: 100%;
     height: 100%;
     left: -280px;
-    background: white;
+    background: black;
     position: absolute;
     transition: all .35s ease-Out;
     bottom: 0;
@@ -171,6 +172,5 @@ a {
 }
   
 #button-2:hover a {
-    color: #2D3142;
+    color: white;
 }
-  
