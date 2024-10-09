@@ -1,4 +1,4 @@
-Movie Portfolio Website
+# Movie Portfolio Website
 
 This repository contains the source code for a website created for a friend of mine. The website serves as a practice project to enhance my skills in HTML, JavaScript, Express.js, and Node.js. It was also a fun project to create something meaningful for a friend.
 
